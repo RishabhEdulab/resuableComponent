@@ -1,39 +1,26 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import InputFiled from "./component/InputFiled";
-import Button from "./component/Button";
-import Coustomdr from "./component/coustomDropdown";
+import EmployeForm from "./component/form/EmployeForm";
+import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
+import ContactUs from "./component/header/Contact-us";
+import AboutUs from "./component/header/About";
+import Header from "./component/header/Header";
+import NotFound from "./component/header/notFound";
 function App() {
-  const [inputValue, setInputValue] = React.useState<string>("");
-  console.log(inputValue);
-  const inputhandler = () => {
-    console.log("button is click");
-  };
   return (
     <div className="App">
-      <h1 className="m-7 capitalize">Hello world!</h1>
-      <InputFiled
-        type="text"
-        value={inputValue}
-        setInputValue={setInputValue}
-        style={{ color: "black" }}
-        placeholder="Enter a name"
-        className="p-2 bg-yellow-500 border-solid border-radius rounded focus:outline-none"
-      />
+      <BrowserRouter>
+        <Header></Header>
+        <Switch>
+          <Route exact path="/" component={EmployeForm} />
 
-      <Button
-        label="Submit"
-        onClick={inputhandler}
-        className="hover:bg-yellow-700 text-blue-600 bg-amber-800 p-3 w-1/4 mt-2"
-      />
-      <Button
-        type="submit"
-        style={{ color: "red", margin: "10px" }}
-        label="login"
-      />
-
-      <Coustomdr className="bg-orange-600 p-4 text-yellow-500 w-1/4 capitalize duration-1000 hover:scale-x-75"></Coustomdr>
+          <Route path="/about" component={AboutUs} />
+          <Route path="/contact" component={ContactUs} />
+          <Route component={NotFound}/>
+        </Switch>
+      </BrowserRouter>
+      {/* <EmployeForm/> */}
     </div>
   );
 }

@@ -28,9 +28,9 @@ interface props {
   className?:string,
   id?:string,
   name?:string,
-  value?:string,
+  value?:string | number,
   style?: CSSProperties,
-  setInputValue: React.Dispatch<React.SetStateAction<string>>,
+  // setInputValue: React.Dispatch<React.SetStateAction<string>>,
   disabled?: boolean,
   readOnly?:boolean,
   size?:number,
@@ -40,7 +40,10 @@ interface props {
   multiple?:boolean,
   pattern?:string,
   required?:boolean,
-  autoFocus: boolean
+  autoFocus: boolean,
+  onClick?:(event?:React.MouseEvent<HTMLButtonElement | HTMLInputElement> ,value?:string)=>void
+  // onChange?:()=>(event?:React.ChangeEvent<HTMLInputElement>,value?:string)=>void
+  onChange?:(event?:React.ChangeEvent<HTMLInputElement>,value?:string)=>void
 }
 const InputFiled= ({
   type,
@@ -50,7 +53,7 @@ const InputFiled= ({
   name,
   value,
   id,
-  setInputValue,
+  // setInputValue,
   disabled,
   readOnly,
   size,
@@ -60,7 +63,9 @@ const InputFiled= ({
   multiple,
   pattern,
   required,
-  autoFocus
+  autoFocus,
+  onClick,
+  onChange
 }:props) => {
   return (
     <div>
@@ -72,7 +77,7 @@ const InputFiled= ({
         style={style}
         name={name}
         value={value}
-        onChange={(e) => setInputValue(e.target.value)}
+        // onChange={(e) => setInputValue(e.target.value)}
         disabled={disabled}
         readOnly={readOnly}
         size={size}
@@ -83,6 +88,8 @@ const InputFiled= ({
         pattern={pattern}
         required={required}
         autoFocus={autoFocus}
+        onClick={onClick}
+        onChange={onChange}
       ></input>
     </div>
   );
@@ -102,6 +109,7 @@ InputFiled.defaultProps={
   multiple:false,
   pattern:"",
   required:false,
-  autoFocus:false
+  autoFocus:false,
+
 }
 export default InputFiled;
